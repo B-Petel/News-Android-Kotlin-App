@@ -9,6 +9,7 @@ fun MainScreen(
     mainViewModel: MainViewModel = koinViewModel()
 ) {
     LaunchedEffect(Unit) {
-        println("we got: ${mainViewModel.getArticles()}")
+        println("we got: ${mainViewModel.getFrenchArticles().data.size}")
+
     }
 }

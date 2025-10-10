@@ -7,7 +7,6 @@ import okhttp3.Response
 class HttpInterceptor: Interceptor {
 
     override fun intercept(chain: Interceptor.Chain): Response {
-        println("key : " + BuildConfig.API_KEY)
         val request = chain.request()
             .newBuilder()
             .addHeader("X-API-Key", BuildConfig.API_KEY)

@@ -9,8 +9,9 @@ class LumenFeedRepositoryImpl(
 ) : LumenFeedRepository {
     override suspend fun getArticles(): ArticleListDto {
         return api.getArticles()
-        TODO("Not yet implemented")
     }
 
-
+    override suspend fun getArticleFilterByLanguage(language: String): ArticleListDto {
+        return api.getArticlesFilterByCountry(language)
+    }
 }

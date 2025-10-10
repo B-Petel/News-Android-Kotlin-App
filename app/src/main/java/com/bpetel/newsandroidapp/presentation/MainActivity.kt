@@ -1,4 +1,4 @@
-package com.bpetel.newsandroidapp
+package com.bpetel.newsandroidapp.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -13,13 +13,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.bpetel.newsandroidapp.ui.theme.NewsAndroidAppTheme
 
-class MainActivity : ComponentActivity() {
+class MainActivity() : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             NewsAndroidAppTheme {
+                MainScreen()
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
                         name = "Android",

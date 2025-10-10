@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -17,16 +19,19 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
+        val properties = Properties()
+        properties.load(project.rootProject.file(".gradle/gradle.properties").inputStream())
+
         buildConfigField(
             "String",
             "API_KEY",
-            "\"${project.findProperty("API_KEY")}\""
+            "\"${properties["API_KEY"]}\""
         )
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -56,7 +61,13 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+
+    implementation(libs.koin)
+    implementation(libs.koin.compose.viewmodel)
     implementation(libs.retrofit2)
+    implementation(libs.gson.converter)
+    implementation(libs.okhttp3)
+    implementation(libs.okhttp3.logging)
 
 
     testImplementation(libs.junit)

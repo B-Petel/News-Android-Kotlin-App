@@ -1,8 +1,9 @@
-package com.bpetel.newsandroidapp.presentation
+package com.bpetel.newsandroidapp.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bpetel.newsandroidapp.domain.LumenFeedRepository
+import com.bpetel.newsandroidapp.presentation.UIState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
@@ -16,25 +17,35 @@ class MainViewModel (
     private val _uiState = MutableStateFlow(UIState())
     val uiState = _uiState.asStateFlow()
 
+    init {
+        this.getFrenchArticles()
+    }
+
     fun getArticles() {
         viewModelScope.launch {
-            repository.getArticles().map {
-                articleListDto -> UIState(articleListDto.data)
-            }.collect { it ->
-                _uiState.update { it }
-            }
+            repository.getArticles()
+                .map { articleList ->
+                    UIState(articleList)
+                }
+                .collect { it ->
+                    _uiState.update { it }
+                }
         }
     }
 
     fun getFrenchArticles() {
         viewModelScope.launch {
-            repository.getArticleFilterByLanguage("en")
-                .map {
-                    articles -> UIState(articles.data)
+            repository.getArticleFilterByLanguage("EN")
+                .map { articleList ->
+                    UIState(articleList)
                 }
                 .collect { response ->
                     _uiState.update { response }
                 }
-            }
         }
+    }
+
+    fun getToArticleDetails() {
+
+    }
 }

@@ -102,8 +102,7 @@ fun DetailsScreen(
         }
 
         val sdf = SimpleDateFormat("dd/MM/yy hh:mm a", Locale.FRANCE)
-        val timestamp = Timestamp (article.publishedAt.toLong())
-        val date = Date(timestamp.time)
+        val date = Date(article.publishedAt.toLong() * 1000)
         Text(
             modifier = Modifier.fillMaxWidth(),
             text = sdf.format(date),

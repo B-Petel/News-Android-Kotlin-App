@@ -12,22 +12,9 @@ class LumenFeedRepositoryImpl(
     override suspend fun getArticles(): Flow<List<Article>> {
         val articleList = mutableListOf<Article>()
 
-        api.getArticles().data
-            .forEach { article ->
+        api.getArticles().data.forEach { article ->
                 articleList.add(article.toArticle())
             }
-
-        return flow {
-            emit(articleList)
-        }
-    }
-
-    override suspend fun getArticleFilterByLanguage(language: String): Flow<List<Article>> {
-        val articleList = mutableListOf<Article>()
-
-        api.getArticles().data.forEach { article ->
-            articleList.add(article.toArticle())
-        }
 
         return flow {
             emit(articleList)

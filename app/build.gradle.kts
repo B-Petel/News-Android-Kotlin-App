@@ -50,6 +50,10 @@ android {
         buildConfig = true
         compose = true
     }
+
+    tasks.withType<Test>() {
+        useJUnitPlatform()
+    }
 }
 
 dependencies {
@@ -72,9 +76,15 @@ dependencies {
     implementation(libs.okhttp3.logging)
     implementation(libs.coil.compose)
     implementation(libs.coil.network)
+    implementation(libs.kotlinx.serialization.json)
 
 
     testImplementation(libs.junit)
+    testImplementation(libs.junit5)
+    testImplementation(libs.junit5.api)
+    testRuntimeOnly(libs.junit5.engine)
+    testImplementation(libs.okhttp3.mockwebserver)
+    testImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

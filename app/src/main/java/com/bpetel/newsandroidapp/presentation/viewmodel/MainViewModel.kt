@@ -18,24 +18,12 @@ class MainViewModel (
     val uiState = _uiState.asStateFlow()
 
     init {
-        getFrenchArticles()
+        getArticles()
     }
 
     fun getArticles() {
         viewModelScope.launch {
             repository.getArticles()
-                .map { articleList ->
-                    UIState(articleList)
-                }
-                .collect { it ->
-                    _uiState.update { it }
-                }
-        }
-    }
-
-    fun getFrenchArticles() {
-        viewModelScope.launch {
-            repository.getArticleFilterByLanguage("EN")
                 .map { articleList ->
                     UIState(articleList)
                 }

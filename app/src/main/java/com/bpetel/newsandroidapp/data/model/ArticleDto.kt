@@ -9,7 +9,7 @@ data class ArticleDto(
     @SerializedName("content_excerpt") val contentExcerpt: String,
     val country: String,
     @SerializedName("full_content_html") val fullContentHtml: String,
-    @SerializedName("full_content_sanitized") val fullContentSanitized: String,
+    @SerializedName("full_content_sanitized") val fullContentSanitized: String?,
     @SerializedName("has_video") val hasVideo: Boolean,
     val id: String,
     @SerializedName("image_url") val imageUrl: String,

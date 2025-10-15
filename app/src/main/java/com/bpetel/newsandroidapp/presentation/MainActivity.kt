@@ -40,13 +40,11 @@ class MainActivity() : ComponentActivity() {
     fun Navigation(
         modifier: Modifier
     ){
-        // important part and must declare fisrt
         val navController = rememberNavController()
         NavHost(
             navController = navController,
-            startDestination = Screen.MainScreen // Set Screen to appear for the first time
+            startDestination = Screen.MainScreen
         ){
-            // Declare all Screen in here
             composable<Screen.MainScreen>{
                 MainScreen(
                     modifier = modifier,
@@ -58,7 +56,8 @@ class MainActivity() : ComponentActivity() {
                 val args: Article = it.toRoute()
                 DetailsScreen(
                     modifier = modifier,
-                    article = args
+                    article = args,
+                    onBackClick = { navController.popBackStack() }
                 )
             }
         }

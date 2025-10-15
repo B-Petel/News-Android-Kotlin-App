@@ -18,7 +18,7 @@ class MainViewModel (
     val uiState = _uiState.asStateFlow()
 
     init {
-        this.getFrenchArticles()
+        getFrenchArticles()
     }
 
     fun getArticles() {
@@ -43,9 +43,5 @@ class MainViewModel (
                     _uiState.update { response }
                 }
         }
-    }
-
-    fun getToArticleDetails() {
-
     }
 }

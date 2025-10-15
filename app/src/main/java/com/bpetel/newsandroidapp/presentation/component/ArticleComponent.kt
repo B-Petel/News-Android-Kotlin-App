@@ -14,11 +14,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
 import com.bpetel.newsandroidapp.domain.Article
-import com.bpetel.newsandroidapp.ui.theme.NewsAndroidAppTheme
 
 @Composable
 fun ArticleComponent(
@@ -44,23 +42,15 @@ fun ArticleComponent(
                 contentDescription = null
             )
             if (title != null)
-            Text(
-                modifier = Modifier.padding(5.dp),
-                text = title, maxLines = 2,
-                style = MaterialTheme.typography.titleLarge,
-                fontWeight = FontWeight.Medium
-            )
+                Text(
+                    modifier = Modifier.padding(5.dp),
+                    text = title, maxLines = 2,
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Medium
+                )
 
             if (content != null)
-            Text(modifier = Modifier.padding(5.dp), text = content, maxLines = 1)
+                Text(modifier = Modifier.padding(5.dp), text = content, maxLines = 1)
         }
     }
 }
-
-//@Preview(showBackground = true)
-//@Composable
-//fun ArticleComponentPreview() {
-//    NewsAndroidAppTheme {
-//        ArticleComponent("Title", "Content", "Author", "https://home.moe.gov.om/templates/moe/assets/images/logo.png")
-//    }
-//}

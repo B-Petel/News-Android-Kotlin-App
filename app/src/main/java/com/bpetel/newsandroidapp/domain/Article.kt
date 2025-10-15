@@ -1,5 +1,8 @@
 package com.bpetel.newsandroidapp.domain
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Article(
     val id: String,
     val publisherId: String?,

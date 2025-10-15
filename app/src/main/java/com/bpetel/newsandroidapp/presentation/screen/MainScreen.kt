@@ -36,6 +36,5 @@ fun MainScreen(
             println("we got: ${state.value.uiList?.size}")
         }
     }
-
 }
 

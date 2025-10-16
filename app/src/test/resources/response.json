@@ -1,0 +1,33 @@
+{
+  "meta": {
+    "total_hits": 1250,
+    "page": 1,
+    "per_page": 20,
+    "total_pages": 63,
+    "query_time_ms": 45
+  },
+  "data": [
+    {
+      "id": "6476905b27d8faebbb20b44d",
+      "title": "The Psychology of Modern Men",
+      "content_excerpt": "In today’s video, I explore the cultural shifts...",
+      "full_content_html": "<body><h1>The Psychology of Modern Men</h1><p>In today’s video, I explore...</p></body>",
+      "full_content_sanitized": "The Psychology of Modern Men In today’s video, I explore...",
+      "author": "Sarah Stiles",
+      "keywords": [
+        "commitment",
+        "dating"
+      ],
+      "language": "en",
+      "country": "US",
+      "publisher_id": "6476905b27d8faebbb20b44c",
+      "topic_id": "6474fa420008b2b81431b666",
+      "sentiment_label": "Negative",
+      "has_video": true,
+      "published_at": 1743940848,
+      "sentiment_score": -0.125,
+      "source_link": "https://matthewhussey.com/blog/struggling-in-dating/",
+      "image_url": "https://matthewhussey.com/wp-content/uploads/..."
+    }
+  ]
+}

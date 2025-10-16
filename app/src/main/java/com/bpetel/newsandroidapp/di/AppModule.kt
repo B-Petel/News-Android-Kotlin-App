@@ -20,7 +20,7 @@ val appModule = module {
 
         Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .client(okHttpClient)
+//            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(LumenFeedApi::class.java)

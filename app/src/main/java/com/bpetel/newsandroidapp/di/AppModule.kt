@@ -13,14 +13,14 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 val appModule = module {
-    single {
+    single<LumenFeedApi> {
         val okHttpClient = OkHttpClient.Builder()
             .addInterceptor(HttpInterceptor())
             .build()
 
         Retrofit.Builder()
             .baseUrl(BASE_URL)
-//            .client(okHttpClient)
+            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(LumenFeedApi::class.java)

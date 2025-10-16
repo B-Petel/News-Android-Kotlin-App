@@ -93,6 +93,7 @@ dependencies {
     testImplementation(libs.junit5)
     testImplementation(libs.junit5.api)
     testRuntimeOnly(libs.junit5.platform.launcher)
+    testImplementation(libs.koin.test.junit5)
     testImplementation(libs.okhttp3.mockwebserver)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.robolectric)

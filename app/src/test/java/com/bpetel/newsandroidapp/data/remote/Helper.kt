@@ -1,4 +1,4 @@
-package com.bpetel.newsandroidapp
+package com.bpetel.newsandroidapp.data.remote
 
 import java.io.InputStreamReader
 

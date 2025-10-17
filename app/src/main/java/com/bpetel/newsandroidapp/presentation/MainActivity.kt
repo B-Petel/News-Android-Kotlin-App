@@ -9,12 +9,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.bpetel.newsandroidapp.domain.Article
+import com.bpetel.newsandroidapp.domain.ArticleDto
 import com.bpetel.newsandroidapp.presentation.screen.DetailsScreen
 import com.bpetel.newsandroidapp.presentation.screen.MainScreen
 import com.bpetel.newsandroidapp.ui.theme.NewsAndroidAppTheme
@@ -52,11 +51,11 @@ class MainActivity() : ComponentActivity() {
                 )
             }
 
-            composable<Article> {
-                val args: Article = it.toRoute()
+            composable<ArticleDto> {
+                val args: ArticleDto = it.toRoute()
                 DetailsScreen(
                     modifier = modifier,
-                    article = args,
+                    articleDto = args,
                     onBackClick = { navController.popBackStack() }
                 )
             }

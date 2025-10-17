@@ -14,7 +14,9 @@ class MainViewModel (
     private val repository: LumenFeedRepository
 ): ViewModel() {
 
-    private val _uiState = MutableStateFlow(UIState())
+    private val _uiState = MutableStateFlow(UIState(
+        uiList = emptyList()
+    ))
     val uiState = _uiState.asStateFlow()
 
     init {

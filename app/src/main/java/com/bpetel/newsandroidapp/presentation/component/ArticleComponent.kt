@@ -16,20 +16,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.bpetel.newsandroidapp.domain.Article
 
 @Composable
 fun ArticleComponent(
-    article: Article,
-    title: String?,
-    content: String?,
-    author: String?,
+    title: String,
+    summary: String?,
     img: String?,
-    onItemClick: (Article) -> Unit) {
+    onItemClick: () -> Unit) {
     Card(
         modifier = Modifier
             .padding(5.dp)
-            .clickable{ onItemClick(article) },
+            .clickable{ onItemClick() },
         colors = CardDefaults.cardColors(Color.White),
         elevation = CardDefaults.cardElevation(5.dp)
     ) {
@@ -41,16 +38,15 @@ fun ArticleComponent(
                 model = img,
                 contentDescription = null
             )
-            if (title != null)
-                Text(
-                    modifier = Modifier.padding(5.dp),
-                    text = title, maxLines = 2,
-                    style = MaterialTheme.typography.titleLarge,
-                    fontWeight = FontWeight.Medium
-                )
-
-            if (content != null)
-                Text(modifier = Modifier.padding(5.dp), text = content, maxLines = 1)
+            Text(
+                modifier = Modifier.padding(5.dp),
+                text = title, maxLines = 2,
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Medium
+            )
+            summary?.let {
+                Text(modifier = Modifier.padding(5.dp), text = summary, maxLines = 1)
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import com.bpetel.newsandroidapp.domain.ArticleDto
+import com.bpetel.newsandroidapp.presentation.UIState
 import com.bpetel.newsandroidapp.presentation.component.ArticleComponent
 import com.bpetel.newsandroidapp.presentation.viewmodel.MainViewModel
 import org.koin.compose.viewmodel.koinViewModel
@@ -18,19 +19,26 @@ fun MainScreen(
     modifier: Modifier,
     onItemClick: (ArticleDto) -> Unit
 ) {
-    val state = mainViewModel.uiState.collectAsState()
-
-    LazyColumn(
-        modifier = modifier.background(color = Color.LightGray)
-    ) {
-        items(state.value.uiList) { it ->
-            ArticleComponent(
-                it.title,
-                it.contentExcerpt,
-                it.imageUrl
-            ) { onItemClick(it) }
+    mainViewModel.uiState.collectAsState().value.let { state ->
+        when(state) {
+            is UIState.Error ->
+                println("UIState.Error : " + state.error)
+            UIState.Loading ->
+                println("UIState.Loading")
+            is UIState.Success ->
+                LazyColumn(
+                    modifier = modifier.background(color = Color.LightGray)
+                ) {
+                    println("UIState.Success")
+                    items(state.articles) { it ->
+                        ArticleComponent(
+                            it.title,
+                            it.contentExcerpt,
+                            it.imageUrl
+                        ) { onItemClick(it) }
+                    }
+                }
         }
-        println("we got: ${state.value.uiList.size}")
     }
 }
 

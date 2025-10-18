@@ -88,7 +88,7 @@ fun DetailsScreen(
         }
 
         val sdf = SimpleDateFormat("dd/MM/yy hh:mm a", Locale.FRANCE)
-        val date = Date(articleDto.publishedAt.toLong() * 1000)
+        val date = Date(articleDto.publishedAtInMs)
         Text(
             modifier = Modifier.fillMaxWidth(),
             text = sdf.format(date),
@@ -125,7 +125,7 @@ fun DetailsScreenPreview() {
             publisherId = "",
             contentExcerpt = "",
             imageUrl = "",
-            publishedAt = 0,
+            publishedAtInMs = 0,
             sentimentLabel = "",
             sentimentScore = 0f
         )

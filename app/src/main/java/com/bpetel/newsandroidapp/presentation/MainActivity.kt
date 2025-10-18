@@ -7,15 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.toRoute
-import com.bpetel.newsandroidapp.domain.ArticleDto
-import com.bpetel.newsandroidapp.presentation.screen.DetailsScreen
-import com.bpetel.newsandroidapp.presentation.screen.MainScreen
+import com.bpetel.newsandroidapp.presentation.navigation.Navigation
 import com.bpetel.newsandroidapp.ui.theme.NewsAndroidAppTheme
 
 class MainActivity() : ComponentActivity() {
@@ -30,34 +23,6 @@ class MainActivity() : ComponentActivity() {
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
-            }
-        }
-    }
-
-
-    @Composable
-    fun Navigation(
-        modifier: Modifier
-    ){
-        val navController = rememberNavController()
-        NavHost(
-            navController = navController,
-            startDestination = Screen.MainScreen
-        ){
-            composable<Screen.MainScreen>{
-                MainScreen(
-                    modifier = modifier,
-                    onItemClick = { article -> navController.navigate(article) }
-                )
-            }
-
-            composable<ArticleDto> {
-                val args: ArticleDto = it.toRoute()
-                DetailsScreen(
-                    modifier = modifier,
-                    articleDto = args,
-                    onBackClick = { navController.popBackStack() }
-                )
             }
         }
     }

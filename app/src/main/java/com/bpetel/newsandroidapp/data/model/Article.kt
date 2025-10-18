@@ -44,7 +44,7 @@ fun Article.toDomain(): ArticleDto {
         contentExcerpt = contentExcerpt,
         fullContentSanitized = fullContentSanitized,
         imageUrl = imageUrl,
-        publishedAt = publishedAt,
+        publishedAtInMs = publishedAt * 1000L,
         sentimentLabel = sentimentLabel,
         sentimentScore = sentimentScore
     )

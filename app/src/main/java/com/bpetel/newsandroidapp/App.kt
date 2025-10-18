@@ -12,11 +12,8 @@ class App : Application() {
         super.onCreate()
 
         startKoin {
-            // Log Koin into Android logger
             androidLogger()
-            // Reference Android context
             androidContext(this@App)
-            // Load modules
             modules(appModule)
         }
     }

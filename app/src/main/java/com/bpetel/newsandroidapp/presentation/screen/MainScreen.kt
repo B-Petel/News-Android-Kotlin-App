@@ -29,7 +29,6 @@ fun MainScreen(
                 LazyColumn(
                     modifier = modifier.background(color = Color.LightGray)
                 ) {
-                    println("UIState.Success")
                     items(state.articles) { it ->
                         ArticleComponent(
                             it.title,

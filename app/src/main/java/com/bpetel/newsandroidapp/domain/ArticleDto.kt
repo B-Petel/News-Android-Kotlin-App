@@ -11,7 +11,7 @@ data class ArticleDto(
     val contentExcerpt: String?,
     val fullContentSanitized: String?,
     val imageUrl: String?,
-    val publishedAt: Int,
+    val publishedAtInMs: Long,
     val sentimentLabel: String?,
     val sentimentScore: Float?
 )

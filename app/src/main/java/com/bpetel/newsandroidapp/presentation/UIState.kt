@@ -1,7 +1,9 @@
 package com.bpetel.newsandroidapp.presentation
 
-import com.bpetel.newsandroidapp.domain.Article
+import com.bpetel.newsandroidapp.domain.ArticleDto
 
-data class UIState(
-    val uiList: List<Article>? = null
-)
+sealed class UIState {
+    data object Loading: UIState()
+    data class Success(val articles: List<ArticleDto>): UIState()
+    data class Error(val error: String?): UIState()
+}

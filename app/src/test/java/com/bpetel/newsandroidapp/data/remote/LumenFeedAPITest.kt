@@ -1,6 +1,7 @@
 package com.bpetel.newsandroidapp.data.remote
 
-import com.bpetel.newsandroidapp.data.model.ArticleListDto
+import com.bpetel.newsandroidapp.data.model.ArticleSearchResponse
+import com.bpetel.newsandroidapp.data.model.Meta
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.test.runTest
@@ -65,7 +66,16 @@ class LumenFeedAPITest {
 
     @Test
     fun `getArticles, returns Success`() = runTest {
-        val dto = ArticleListDto()//The object I want back as response
+        val dto = ArticleSearchResponse(
+            data = emptyList(),
+            meta = Meta(
+                page = 0,
+                perPage = 0,
+                queryTimeMs = 0,
+                totalHits = 0,
+                totalPages = 0
+            )
+        )//The object I want back as response
         val gson: Gson = GsonBuilder().create()
         val json = gson.toJson(dto)!!//Conver the object into json string using GSON
         val res = MockResponse()//Make a fake response for our server call
@@ -75,6 +85,6 @@ class LumenFeedAPITest {
         val data = api.getArticles()//make the call to our fake server(as we are using fake base url)
         mockWebServer.takeRequest()//let the server take the request
 
-        assertEquals(data.body(), dto)//the data you are getting as the call response should be same
+        assertEquals(data.body()?.data, dto.data)//the data you are getting as the call response should be same
     }
 }

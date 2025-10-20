@@ -1,10 +1,10 @@
 package com.bpetel.newsandroidapp.data.remote
 
-import com.bpetel.newsandroidapp.data.model.ArticleListDto
+import com.bpetel.newsandroidapp.data.model.ArticleSearchResponse
 import retrofit2.Response
 import retrofit2.http.GET
 
 interface LumenFeedApi {
     @GET("articles")
-    suspend fun getArticles(): Response<ArticleListDto>
+    suspend fun getArticles(): Response<ArticleSearchResponse>
 }

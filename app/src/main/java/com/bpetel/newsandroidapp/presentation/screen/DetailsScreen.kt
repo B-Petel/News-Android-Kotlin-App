@@ -1,6 +1,5 @@
 package com.bpetel.newsandroidapp.presentation.screen
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,12 +9,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ButtonDefaults.buttonColors
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.IconButtonColors
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -31,8 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import com.bpetel.newsandroidapp.R
-import com.bpetel.newsandroidapp.domain.Article
-import java.sql.Timestamp
+import com.bpetel.newsandroidapp.domain.ArticleDto
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -40,7 +34,7 @@ import java.util.Locale
 @Composable
 fun DetailsScreen(
     modifier: Modifier,
-    article: Article,
+    articleDto: ArticleDto,
     onBackClick: () -> Unit
 ) {
 
@@ -56,7 +50,7 @@ fun DetailsScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .align (Alignment.TopStart),
-                model = article.imageUrl,
+                model = articleDto.imageUrl,
                 contentDescription = null
             )
 
@@ -75,25 +69,17 @@ fun DetailsScreen(
         Row(
             modifier = Modifier.fillMaxWidth()
         ) {
-            if (article.publisherId.isNotEmpty())
-                Text(
-                    text = article.publisherId,
-                    color = Color.DarkGray,
-                    fontSize = 10.sp,
-                    fontStyle = FontStyle.Italic
-                )
+            Text(
+                text = articleDto.publisherId,
+                color = Color.DarkGray,
+                fontSize = 10.sp,
+                fontStyle = FontStyle.Italic
+            )
 
-
-
-            if (article.author.isNotEmpty()) {
+            articleDto.author?.let {
+                if (it.isNotBlank())
                 Text(
-                    text = " : ",
-                    fontSize = 10.sp,
-                    fontStyle = FontStyle.Italic,
-                    color = Color.DarkGray
-                )
-                Text(
-                    text = article.author,
+                    text = " : " + articleDto.author,
                     fontSize = 10.sp,
                     fontStyle = FontStyle.Italic,
                     color = Color.DarkGray
@@ -102,7 +88,7 @@ fun DetailsScreen(
         }
 
         val sdf = SimpleDateFormat("dd/MM/yy hh:mm a", Locale.FRANCE)
-        val date = Date(article.publishedAt.toLong() * 1000)
+        val date = Date(articleDto.publishedAtInMs)
         Text(
             modifier = Modifier.fillMaxWidth(),
             text = sdf.format(date),
@@ -112,16 +98,17 @@ fun DetailsScreen(
 
         Text(
             modifier = Modifier.fillMaxWidth().padding(5.dp),
-            text = article.title,
+            text = articleDto.title,
             style = MaterialTheme.typography.titleLarge,
             fontWeight = FontWeight.Medium
         )
 
-        if (!article.fullContentSanitized.isNullOrEmpty())
-        Text(
-            modifier = Modifier.fillMaxWidth().padding(5.dp),
-            text = article.fullContentSanitized
-        )
+        articleDto.fullContentSanitized?.let {
+            Text(
+                modifier = Modifier.fillMaxWidth().padding(5.dp),
+                text = articleDto.fullContentSanitized
+            )
+        }
     }
 }
 
@@ -130,11 +117,17 @@ fun DetailsScreen(
 fun DetailsScreenPreview() {
     DetailsScreen(
         modifier = Modifier.fillMaxSize(),
-        Article(
+        ArticleDto(
+            id = "",
             title = "Title",
             fullContentSanitized = stringResource(R.string.lorem_ipsum),
-            author = "Author"
-        ),
-        {}
-    )
+            author = "Author",
+            publisherId = "",
+            contentExcerpt = "",
+            imageUrl = "",
+            publishedAtInMs = 0,
+            sentimentLabel = "",
+            sentimentScore = 0f
+        )
+    ) {}
 }

@@ -1,4 +1,4 @@
-package com.bpetel.newsandroidapp.presentation
+package com.bpetel.newsandroidapp.presentation.navigation
 
 import kotlinx.serialization.Serializable
 

@@ -1,9 +1,7 @@
 package com.bpetel.newsandroidapp.data.remote
 
 import com.bpetel.newsandroidapp.data.model.ArticleSearchResponse
-import com.bpetel.newsandroidapp.data.model.Meta
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import kotlinx.coroutines.test.runTest
 import okhttp3.OkHttpClient
 import okhttp3.mockwebserver.MockResponse
@@ -23,8 +21,9 @@ import tech.apter.junit.jupiter.robolectric.RobolectricExtension
 class LumenFeedAPITest {
     private lateinit var mockWebServer: MockWebServer
     private lateinit var api: LumenFeedApi
+    private val content = Helper.readFileResource("/response.json")
 
-    @BeforeEach//Using JUnit5
+    @BeforeEach
     fun beforeEach() {
         mockWebServer = MockWebServer()
         mockWebServer.start()
@@ -49,42 +48,38 @@ class LumenFeedAPITest {
 
     @Test
     fun testGetArticles_returnArticles() = runTest {
-        val mockResponse = MockResponse()
-        val content = Helper.readFileResource("/response.json")
-        mockResponse.setResponseCode(200)
-        mockResponse.setBody(content)
-        mockWebServer.enqueue(mockResponse)
+        val articleList = Gson().fromJson(content, ArticleSearchResponse::class.java)
+        mockWebServer.enqueue(getMockResponse(content, 200))
 
         val response = api.getArticles()
         val request = mockWebServer.takeRequest()
 
+        assertEquals(200, response.code())
         assertEquals("/v1/articles", request.requestUrl?.encodedPath)
         assertNotNull(request.headers["X-API-Key"])
         assertEquals(false, response.body()?.data?.isEmpty())
         assertEquals(1, response.body()?.data?.size)
+        assertEquals(articleList.data, response.body()?.data)
     }
 
     @Test
-    fun `getArticles, returns Success`() = runTest {
-        val dto = ArticleSearchResponse(
-            data = emptyList(),
-            meta = Meta(
-                page = 0,
-                perPage = 0,
-                queryTimeMs = 0,
-                totalHits = 0,
-                totalPages = 0
-            )
-        )//The object I want back as response
-        val gson: Gson = GsonBuilder().create()
-        val json = gson.toJson(dto)!!//Conver the object into json string using GSON
-        val res = MockResponse()//Make a fake response for our server call
-        res.setBody(json)//set the body of the fake response as the json string you are expecting as a response
-        mockWebServer.enqueue(res)//add it in the server response queue
+    fun testGetArticles_returnUnauthorized() = runTest {
+        mockWebServer.enqueue(getMockResponse(content, 400))
 
-        val data = api.getArticles()//make the call to our fake server(as we are using fake base url)
-        mockWebServer.takeRequest()//let the server take the request
+        val response = api.getArticles()
+        assertEquals(400, response.code())
+    }
 
-        assertEquals(data.body()?.data, dto.data)//the data you are getting as the call response should be same
+    @Test
+    fun testGetArticles_returnIOException() = runTest {
+        
+    }
+
+    fun getMockResponse(content: String, code: Int): MockResponse {
+        val mockResponse = MockResponse()
+        mockResponse.setResponseCode(code)
+        mockResponse.setBody(content)
+
+        return mockResponse
     }
 }

@@ -1,4 +1,4 @@
-package com.bpetel.newsandroidapp.utils
+package com.bpetel.newsandroidapp.data.utils
 
 class Constants {
 

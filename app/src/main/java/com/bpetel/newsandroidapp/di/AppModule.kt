@@ -5,7 +5,7 @@ import com.bpetel.newsandroidapp.data.remote.LumenFeedApi
 import com.bpetel.newsandroidapp.data.remote.LumenFeedRepositoryImpl
 import com.bpetel.newsandroidapp.domain.LumenFeedRepository
 import com.bpetel.newsandroidapp.presentation.viewmodel.MainViewModel
-import com.bpetel.newsandroidapp.utils.Constants.Companion.BASE_URL
+import com.bpetel.newsandroidapp.data.utils.Constants.Companion.BASE_URL
 import okhttp3.OkHttpClient
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module

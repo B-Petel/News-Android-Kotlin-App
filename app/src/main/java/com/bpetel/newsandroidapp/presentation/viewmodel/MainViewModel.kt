@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.bpetel.newsandroidapp.data.remote.NetworkResult
 import com.bpetel.newsandroidapp.domain.LumenFeedRepository
 import com.bpetel.newsandroidapp.presentation.UIState
+import com.bpetel.newsandroidapp.presentation.UiEvent
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -18,6 +19,13 @@ class MainViewModel (
 
     init {
         getArticles()
+    }
+
+    fun onEvent(event: UiEvent) {
+        when (event) {
+            UiEvent.Refresh ->
+                getArticles()
+        }
     }
 
     fun getArticles() {

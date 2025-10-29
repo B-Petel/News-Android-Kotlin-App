@@ -1,5 +1,7 @@
 package com.bpetel.newsandroidapp.presentation.articles
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -34,7 +36,12 @@ import com.bpetel.newsandroidapp.ui.theme.AppTitle
 import com.bpetel.newsandroidapp.ui.theme.NewsPaperSecondary
 import com.bpetel.newsandroidapp.ui.theme.NewsPaperTertiary
 import org.koin.compose.viewmodel.koinViewModel
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.util.Date
+import java.util.Locale
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun ArticlesFeedScreen(
     modifier: Modifier,
@@ -42,6 +49,12 @@ fun ArticlesFeedScreen(
     onItemClick: (ArticleDto) -> Unit
 ) {
     var isRefreshing by remember { mutableStateOf(false) }
+    val sdf = SimpleDateFormat("EEE, MMMM - dd - yyyy", Locale.UK)
+
+    val dayString = LocalDate.now().dayOfWeek.toString()
+    val day = LocalDate.now().dayOfMonth.toString()
+    val month = LocalDate.now().month.toString()
+    val year = LocalDate.now().year.toString()
 
     Column(
         modifier = modifier.padding(32.dp),
@@ -67,7 +80,7 @@ fun ArticlesFeedScreen(
             }
 
             Text(
-                text = "ierutairts"
+                text = "${dayString.substring(0,3)}, $month $day"
             )
         }
 

@@ -20,7 +20,9 @@ class LumenFeedRepositoryImpl(
         return flow {
             try {
                 api.getArticles(filter).body()?.data?.forEach { article ->
-                    articleDtoList.add(article.toDomain())
+                    article.imageUrl?.let {
+                        articleDtoList.add(article.toDomain())
+                    }
                 }
                 emit(NetworkResult.Success(articleDtoList))
             } catch (e: HttpException) {

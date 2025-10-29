@@ -1,4 +1,4 @@
-package com.bpetel.newsandroidapp.presentation.viewmodel
+package com.bpetel.newsandroidapp.presentation.articles
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class MainViewModel (
+class ArticleViewModel (
     private val repository: LumenFeedRepository
 ): ViewModel() {
     private val _uiState = MutableStateFlow<UIState>(UIState.Loading)
@@ -30,7 +30,7 @@ class MainViewModel (
 
     fun getArticles() {
         viewModelScope.launch {
-            repository.getArticles().collect { response ->
+            repository.getArticles("language:=en").collect { response ->
                 when(response) {
                     is NetworkResult.Error ->
                         _uiState.update { UIState.Error(response.message) }

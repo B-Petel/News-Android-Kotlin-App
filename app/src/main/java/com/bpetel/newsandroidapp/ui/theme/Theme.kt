@@ -1,6 +1,5 @@
 package com.bpetel.newsandroidapp.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
@@ -33,6 +32,11 @@ private val LightColorScheme = lightColorScheme(
     */
 )
 
+private val NewsPaperScheme = lightColorScheme(
+    primary = NewsPaperPrimary,
+    secondary = NewsPaperSecondary,
+    tertiary = NewsPaperTertiary
+)
 @Composable
 fun NewsAndroidAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -46,8 +50,8 @@ fun NewsAndroidAppTheme(
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
 
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+        darkTheme -> NewsPaperScheme
+        else -> NewsPaperScheme
     }
 
     MaterialTheme(

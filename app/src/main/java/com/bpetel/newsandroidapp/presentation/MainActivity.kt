@@ -10,6 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import com.bpetel.newsandroidapp.presentation.navigation.Navigation
 import com.bpetel.newsandroidapp.ui.theme.NewsAndroidAppTheme
+import com.bpetel.newsandroidapp.ui.theme.NewsPaperPrimary
 
 class MainActivity() : ComponentActivity() {
 
@@ -18,9 +19,15 @@ class MainActivity() : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             NewsAndroidAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                Scaffold(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    containerColor = NewsPaperPrimary
+                ) { innerPadding ->
                     Navigation(
-                        modifier = Modifier.padding(innerPadding)
+                        modifier = Modifier
+                            .padding(innerPadding)
+
                     )
                 }
             }

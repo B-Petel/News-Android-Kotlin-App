@@ -7,8 +7,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.bpetel.newsandroidapp.domain.ArticleDto
-import com.bpetel.newsandroidapp.presentation.screen.DetailsScreen
-import com.bpetel.newsandroidapp.presentation.screen.MainScreen
+import com.bpetel.newsandroidapp.presentation.articles.ArticleDetailsScreen
+import com.bpetel.newsandroidapp.presentation.articles.ArticlesFeedScreen
 
 @Composable
 fun Navigation(
@@ -17,10 +17,10 @@ fun Navigation(
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = Screen.MainScreen
+        startDestination = Screen.ArticlesFeedScreen
     ){
-        composable<Screen.MainScreen>{
-            MainScreen(
+        composable<Screen.ArticlesFeedScreen>{
+            ArticlesFeedScreen(
                 modifier = modifier,
                 onItemClick = { article -> navController.navigate(article) }
             )
@@ -28,7 +28,7 @@ fun Navigation(
 
         composable<ArticleDto> {
             val args: ArticleDto = it.toRoute()
-            DetailsScreen(
+            ArticleDetailsScreen(
                 modifier = modifier,
                 articleDto = args,
                 onBackClick = { navController.popBackStack() }

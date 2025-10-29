@@ -4,5 +4,7 @@ import com.bpetel.newsandroidapp.data.remote.NetworkResult
 import kotlinx.coroutines.flow.Flow
 
 interface LumenFeedRepository {
-    suspend fun getArticles(): Flow<NetworkResult<List<ArticleDto>>>
+    suspend fun getArticles(
+        filter: String
+    ): Flow<NetworkResult<List<ArticleDto>>>
 }

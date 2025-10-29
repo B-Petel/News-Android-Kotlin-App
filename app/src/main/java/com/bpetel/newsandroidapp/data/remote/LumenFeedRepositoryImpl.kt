@@ -12,12 +12,14 @@ class LumenFeedRepositoryImpl(
     private val api: LumenFeedApi
 ) : LumenFeedRepository {
 
-    override suspend fun getArticles(): Flow<NetworkResult<List<ArticleDto>>> {
+    override suspend fun getArticles(
+        filter: String
+    ): Flow<NetworkResult<List<ArticleDto>>> {
         val articleDtoList = mutableListOf<ArticleDto>()
 
         return flow {
             try {
-                api.getArticles().body()?.data?.forEach { article ->
+                api.getArticles(filter).body()?.data?.forEach { article ->
                     articleDtoList.add(article.toDomain())
                 }
                 emit(NetworkResult.Success(articleDtoList))

@@ -1,20 +1,23 @@
 <h1 align="center">News Android Application</h1>
 
+A simple news application displaying articles from different source using [LumenFeed API](https://lumenfeed.com/)
+
 ## ScreenShot
-<img width="500" height="1400" alt="NewsFeed" src="https://github.com/user-attachments/assets/71c7d323-0466-4b3e-946b-a50afadea6b9" /> <img width="500" height="1400" alt="NewsDetails" src="https://github.com/user-attachments/assets/cb9fdd57-895d-4e23-9f89-ff55dc25375c" />
+<p align="center">
+	<img width="300" height="800" alt="NewsFeed" src="https://github.com/user-attachments/assets/71c7d323-0466-4b3e-946b-a50afadea6b9" /> <img width="300" height="800" alt="NewsDetails" src="https://github.com/user-attachments/assets/cb9fdd57-895d-4e23-9f89-ff55dc25375c" />
+</p> 
 
 ## Architecture
 This App use a Clean Architecture with a Domain-Centric pattern
 
 
-<h1 align="center">
+<p align="center">
 	<img width="600" height="1214" alt="Architecture" src="https://github.com/user-attachments/assets/1b64f538-74d4-42dd-b990-82f2a56e8a53" />
-</h1> 
+</p> 
 
 
 ## Data
-+ The API used is [LumenFeed API](https://lumenfeed.com/)
-+ This is a Restful API implemented with Retrofit 2
++ The Restful API is implemented with Retrofit 2
 
 First we create an instance of the API class inside our app module using Koin 
 
